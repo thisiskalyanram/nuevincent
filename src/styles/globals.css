@@ -1,0 +1,167 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --background: #060608;
+  --foreground: #F8FAFC;
+  --card-bg: #0C0C12;
+  --purple-accent: #8B5CF6;
+  --orange-accent: #F97316;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Touch & tap responsiveness */
+button, a, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* Hide scrollbar for clean mobile horizontal sliders */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar,
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Film Grain / Scanline Overlay */
+.cinema-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.cinema-glow-purple {
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, rgba(6, 6, 8, 0) 70%);
+}
+
+.cinema-glow-orange {
+  background: radial-gradient(circle at center, rgba(249, 115, 22, 0.12) 0%, rgba(6, 6, 8, 0) 70%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27273C;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8B5CF6;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(14, 14, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(20, 20, 30, 0.85);
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 12px 36px -8px rgba(139, 92, 246, 0.25);
+}
+
+/* Text Gradients */
+.text-gradient-purple-orange {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #A855F7 80%, #F97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #FFFFFF 30%, #C084FC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FFFFFF 30%, #FB923C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Film Aspect Ratio Box */
+.aspect-cinema {
+  aspect-ratio: 2.39 / 1;
+}
+
+.aspect-video-cinema {
+  aspect-ratio: 16 / 9;
+}
+
+/* Crosshair Viewfinder markers */
+.viewfinder-crosshair {
+  position: relative;
+}
+
+.viewfinder-crosshair::before,
+.viewfinder-crosshair::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.18);
+  width: 12px;
+  height: 12px;
+}
+
+.viewfinder-crosshair::before {
+  top: 12px;
+  left: 12px;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+}
+
+.viewfinder-crosshair::after {
+  bottom: 12px;
+  right: 12px;
+  border-bottom: 1.5px solid;
+  border-right: 1.5px solid;
+}
+
+/* Animations */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-rec {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
