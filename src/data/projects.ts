@@ -1,6 +1,18 @@
-import { PortfolioProject } from "@/types";
+import { PortfolioProject, ProjectCategory } from "@/types";
 
-export const INITIAL_PROJECTS: PortfolioProject[] = [
+/**
+ * ==============================================================================
+ * NUEVINCENT STUDIO - CENTRALIZED PORTFOLIO & PROJECT DATA
+ * ==============================================================================
+ * 
+ * To edit or add projects:
+ * 1. Modify the fields below (title, slug, category, year, thumbnailUrl, videoUrl, etc.)
+ * 2. Thumbnails can use local images (e.g. '/images/projects/my-thumb.jpg') or CDN URLs (Unsplash/YouTube/Pexels).
+ * 3. Video URLs support YouTube (standard/short), Vimeo, or direct .mp4/.webm links.
+ * 4. Set `featured: true` to display the project in the homepage Hero / Selected Work section.
+ */
+
+export const PROJECTS: PortfolioProject[] = [
   {
     id: "proj-1",
     title: "Echoes of Silence",
@@ -10,9 +22,9 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
     duration: "14m 20s",
     client: "Independent Cinema Initiative",
     thumbnailUrl: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1200&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Replaceable placeholder
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     description: "An evocative narrative short film exploring memory, forgotten heritage, and intimate human connection captured in 2.39:1 anamorphic format.",
-    fullStory: "Shot over 9 chilly winter mornings across old heritage architectures and rugged Deccan landscapes, 'Echoes of Silence' is an exploration of silence as a narrative device. Using natural low-light cinematography and custom Kodak 5219 film emulation LUTs, the film captures poetic melancholy through lingering portraits and atmospheric sound design.",
+    fullStory: "Shot over 9 chilly winter mornings across historic Deccan architecture and rugged landscapes, 'Echoes of Silence' is an exploration of silence as a narrative device. Using natural low-light cinematography and custom Kodak 5219 film emulation LUTs, the film captures poetic melancholy through lingering portraits and atmospheric sound design.",
     services: ["Cinematography", "Direction", "Color Grading", "Sound Design", "Original Score"],
     credits: [
       { role: "Director", name: "NUEVINCENT Creative Team" },
@@ -51,7 +63,7 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
       { role: "VFX Supervisor", name: "Elena Rostova" },
       { role: "Colorist", name: "Vincent K." }
     ],
-    challenge: "Synchronizing rapid high-speed car maneuvers with moving camera cranes during 45-minute magic hour twilight window.",
+    challenge: "Synchronizing rapid high-speed car maneuvers with moving camera cranes during a 45-minute magic hour twilight window.",
     solution: "Pre-visualized the entire sequence in 3D animatics, enabling the crew to execute 8 flawless high-speed passes within the optimal lighting window.",
     galleryUrls: [
       "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop",
@@ -169,3 +181,30 @@ export const INITIAL_PROJECTS: PortfolioProject[] = [
     createdAt: "2025-06-15T18:00:00Z"
   }
 ];
+
+/**
+ * Helper functions to query project data synchronously across server & client components
+ */
+export function getAllProjects(category?: ProjectCategory): PortfolioProject[] {
+  if (category && category !== "ALL") {
+    return PROJECTS.filter(
+      (p) => p.category.toUpperCase() === category.toUpperCase()
+    );
+  }
+  return PROJECTS;
+}
+
+export function getFeaturedProjects(): PortfolioProject[] {
+  const featured = PROJECTS.filter((p) => p.featured);
+  return featured.length > 0 ? featured : PROJECTS.slice(0, 4);
+}
+
+export function getProjectBySlug(slug: string): PortfolioProject | null {
+  return PROJECTS.find((p) => p.slug === slug) || null;
+}
+
+export function getRelatedProjects(currentSlug: string, category?: string, limit: number = 3): PortfolioProject[] {
+  return PROJECTS
+    .filter((p) => p.slug !== currentSlug && (!category || p.category === category || p.featured))
+    .slice(0, limit);
+}

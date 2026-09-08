@@ -6,12 +6,10 @@ import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { ProcessSection } from "@/components/home/ProcessSection";
 import { BrandStatement } from "@/components/home/BrandStatement";
 import { CTASection } from "@/components/home/CTASection";
-import { getPortfolioProjects } from "@/lib/firestore-service";
+import { getAllProjects } from "@/data/projects";
 
-export const revalidate = 60; // ISR revalidation
-
-export default async function HomePage() {
-  const projects = await getPortfolioProjects();
+export default function HomePage() {
+  const projects = getAllProjects();
 
   return (
     <div className="space-y-0">

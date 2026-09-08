@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { AuthProvider } from "@/components/providers/AuthProvider";
 
 export const viewport: Viewport = {
   themeColor: "#060608",
@@ -86,11 +85,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-cinema-950 text-foreground selection:bg-brand-purple selection:text-white flex flex-col min-h-screen">
-        <AuthProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </AuthProvider>
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

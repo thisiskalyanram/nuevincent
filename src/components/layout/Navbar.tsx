@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Film, Menu, X, ArrowUpRight, Clapperboard } from "lucide-react";
+import { Menu, X, ArrowUpRight, Clapperboard } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -48,12 +49,6 @@ export function Navbar() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  const isAdminRoute = pathname?.startsWith("/admin");
-
-  if (isAdminRoute) {
-    return null; // Admin has its own dedicated navigation
-  }
-
   return (
     <>
       <header
@@ -68,13 +63,18 @@ export function Navbar() {
           {/* Brand Logo */}
           <Link
             href="/"
-            className="flex items-center space-x-2.5 group focus:outline-none"
+            className="flex items-center space-x-3 group focus:outline-none"
             aria-label="NUEVINCENT Home"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-purple to-brand-orange flex items-center justify-center p-0.5 shadow-glow-purple group-hover:scale-105 transition-transform duration-300">
-              <div className="w-full h-full bg-cinema-950 rounded-[6px] flex items-center justify-center">
-                <Film className="w-4 h-4 text-white group-hover:rotate-12 transition-transform duration-300" />
-              </div>
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cinema-900/90 border border-white/10 p-1 flex items-center justify-center group-hover:border-brand-purple/50 group-hover:shadow-glow-purple transition-all duration-300">
+              <Image
+                src="/logo-icon.png"
+                alt="NUEVINCENT Logo"
+                width={40}
+                height={40}
+                className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
+                priority
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-extrabold text-lg sm:text-xl tracking-wider text-white group-hover:text-brand-purple-light transition-colors">
@@ -141,12 +141,16 @@ export function Navbar() {
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center space-x-2.5"
+                className="flex items-center space-x-3"
               >
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-purple to-brand-orange flex items-center justify-center p-0.5">
-                  <div className="w-full h-full bg-cinema-950 rounded-[6px] flex items-center justify-center">
-                    <Film className="w-4 h-4 text-white" />
-                  </div>
+                <div className="relative w-9 h-9 rounded-xl bg-cinema-900 border border-white/10 p-1 flex items-center justify-center">
+                  <Image
+                    src="/logo-icon.png"
+                    alt="NUEVINCENT Logo"
+                    width={36}
+                    height={36}
+                    className="object-contain w-full h-full"
+                  />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-heading font-bold text-base text-white tracking-wider">

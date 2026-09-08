@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { INITIAL_PROJECTS } from "@/lib/sample-projects";
+import { PROJECTS } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nuevincent.com";
@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1.0 : 0.8,
   }));
 
-  const projectRoutes = INITIAL_PROJECTS.map((project) => ({
+  const projectRoutes = PROJECTS.map((project) => ({
     url: `${baseUrl}/portfolio/${project.slug}`,
     lastModified: new Date().toISOString(),
     changeFrequency: "monthly" as const,

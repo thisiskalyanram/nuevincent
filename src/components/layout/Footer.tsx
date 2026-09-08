@@ -2,17 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Film, ArrowUpRight, Instagram, Youtube, Linkedin, Mail, Phone, MapPin, Lock } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, Instagram, Youtube, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
-  const pathname = usePathname();
-  const isAdminRoute = pathname?.startsWith("/admin");
-
-  if (isAdminRoute) {
-    return null;
-  }
-
   return (
     <footer className="relative bg-cinema-950 border-t border-white/10 pt-16 pb-12 overflow-hidden text-cinema-300">
       {/* Background ambient lighting */}
@@ -23,13 +16,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-14">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-purple to-brand-orange flex items-center justify-center p-0.5">
-                <div className="w-full h-full bg-cinema-950 rounded-[6px] flex items-center justify-center">
-                  <Film className="w-4 h-4 text-white" />
-                </div>
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative w-10 h-10 rounded-xl bg-cinema-900 border border-white/10 p-1 flex items-center justify-center group-hover:border-brand-purple/50 transition-all">
+                <Image
+                  src="/logo-icon.png"
+                  alt="NUEVINCENT Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain w-full h-full"
+                />
               </div>
-              <span className="font-heading font-extrabold text-xl tracking-wider text-white">
+              <span className="font-heading font-extrabold text-xl tracking-wider text-white group-hover:text-brand-purple-light transition-colors">
                 NUEVINCENT
               </span>
             </Link>
@@ -171,13 +168,9 @@ export function Footer() {
             <Link href="/terms" className="hover:text-white transition-colors">
               Terms & Conditions
             </Link>
-            <Link
-              href="/admin/login"
-              className="flex items-center gap-1 text-cinema-500 hover:text-cinema-300 transition-colors"
-              title="Admin Portal"
-            >
-              <Lock className="w-3 h-3" /> Admin
-            </Link>
+            <span className="text-cinema-600 font-mono text-[11px]">
+              NETLIFY CLOUD HOSTED
+            </span>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPortfolioProjects, getProjectBySlug } from "@/lib/firestore-service";
+import { getAllProjects, getProjectBySlug, getRelatedProjects } from "@/data/projects";
 import { ProjectDetailClient } from "./ProjectDetailClient";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -30,26 +30,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const projects = await getPortfolioProjects();
+  const projects = getAllProjects();
   return projects.map((p) => ({
     slug: p.slug,
   }));
 }
 
-export const revalidate = 60;
-
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
   }
 
-  const allProjects = await getPortfolioProjects();
-  const relatedProjects = allProjects
-    .filter((p) => p.slug !== project.slug && (p.category === project.category || p.featured))
-    .slice(0, 3);
+  const relatedProjects = getRelatedProjects(project.slug, project.category, 3);
 
   return <ProjectDetailClient project={project} relatedProjects={relatedProjects} />;
 }

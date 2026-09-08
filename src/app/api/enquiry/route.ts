@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
               <p><strong>Description:</strong><br/>${description}</p>
               <p><strong>Reference:</strong> ${inspirationLink || "N/A"}</p>
               <hr/>
-              <p><a href="https://nuevincent.com/admin/enquiries">Open in Admin CRM</a></p>
+              <p><em>Submitted securely via NUEVINCENT Portal. View submissions in your Netlify Dashboard.</em></p>
             `,
           }),
         });

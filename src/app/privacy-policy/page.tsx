@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-heading font-semibold text-white">5. Security & Storage</h2>
           <p>
-            We implement industry-standard database encryption, Firebase security rules, and access control mechanisms to safeguard client submissions against unauthorized access, loss, or disclosure.
+            We implement industry-standard database and transmission encryption, Netlify serverless TLS security policies, and access control mechanisms to safeguard client submissions against unauthorized access, loss, or disclosure.
           </p>
         </section>
 
