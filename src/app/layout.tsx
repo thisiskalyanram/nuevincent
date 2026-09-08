@@ -1,7 +1,26 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   themeColor: "#060608",
@@ -83,8 +102,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-cinema-950 text-foreground selection:bg-brand-purple selection:text-white flex flex-col min-h-screen">
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="bg-cinema-950 text-foreground selection:bg-brand-purple selection:text-white flex flex-col min-h-screen font-sans antialiased">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
